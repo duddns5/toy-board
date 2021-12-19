@@ -71,13 +71,13 @@ textarea{
 								<td class="column5"><input type="text" name="userId" style="height: 100%;" required="required" maxlength="15"/></td>
 							</tr>
 							<tr>
-								<td class="column1" colspan="2"><input type="file" name="files" value="파일" multiple/></td>
+								<td class="column1" colspan="2"><input type="file" name="files" multiple/></td>
 								<td class="column3"></td>
 								<td class="column4">Password : </td>
 								<td class="column5"><input type="password" name="password" style="height: 100%;" maxlength="4"/></td>
 							</tr>
 							<tr>
-								<td class="column1" colspan="5"><textarea required="required" maxlength="2000"></textarea></td>
+								<td class="column1" colspan="5"><textarea name="content" required="required" maxlength="2000"></textarea></td>
 							</tr>
 					</table>
 				<div class="movementWrapper" style="display: flex;justify-content: space-between;">

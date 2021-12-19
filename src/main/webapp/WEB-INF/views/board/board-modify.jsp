@@ -46,25 +46,13 @@
 	line-height: 1.2;
 	border-radius: 10px;
 }
-.pagination{
-	position: relative;
-	left: 42%;
-}
-.btn{
-	background-color: #36304a;
-	padding: 16px 16px 16px 16px;
-	border-radius: 10px;
+textarea{
+	width: 96%;
+	height: 600px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	border: none;
-	margin-right: 6px;
-}
-.column1{
-	width: 120px;
-}
-.column6{
-	width: 80px;
-}
-tr>th, tr>td{
-	text-align: center !important;
+	resize: none;
 }
 </style>
 </head>
@@ -74,51 +62,33 @@ tr>th, tr>td{
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100">
+				<form action="/board/board-update" enctype="multipart/form-data" method="post">
 					<table>
-						<thead>
-							<tr class="table100-head">
-								<th class="column1">No</th>
-								<th class="column2">ID</th>
-								<th class="column3">Title</th>
-								<th class="column4">Date</th>
-								<th class="column5">Views</th>
-								<th class="column6">Likes</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${boardList.board}" var="list" varStatus="status">
 							<tr>
-								<td class="column1">${list.bdIdx}</td>
-								<td class="column2">${list.userId}</td>
-								<td class="column3"><a href="board/board-detail?bdIdx=${list.bdIdx}">${list.title}</a></td>
-								<td class="column4">${list.regDate}</td>
-								<td class="column5">${list.viewCount}</td>
-								<td class="column6">${list.recCount}</td>
+								<td class="column1">Title :</td>
+								<td class="column2" colspan="2"><input type="text" name="title" value="${board.title}" style="width: 100%;height: 100%;" required="required" maxlength="100"/></td>
+								<td class="column4">ID : </td>
+								<td class="column5"><input type="text" name="userId" value="${board.userId}" style="height: 100%;" readonly="readonly"/></td>
 							</tr>
-							</c:forEach>
-						</tbody>
+							<tr>
+								<td class="column1" colspan="2"><input type="file" name="files" multiple/></td>
+								<td class="column3"><input type="hidden" name="bdIdx" value="${board.bdIdx}"></td>
+								<td class="column4">Password : </td>
+								<td class="column5"><input type="password" name="password" style="height: 100%;" maxlength="4"/></td>
+							</tr>
+							<tr>
+								<td class="column1" colspan="5"><textarea name="content" required="required" maxlength="2000">${board.content}</textarea></td>
+							</tr>
 					</table>
-				</div>
 				<div class="movementWrapper" style="display: flex;justify-content: space-between;">
-					<ul class="pagination">
-						<li>
-							<a class="btn btn-primary" href="${boardList.paging.url}?page=${boardList.paging.prev}" aria-label="Previous"> <span aria-hidden="true" style="color: white">&laquo;</span></a>
-						</li>
-						<li>
-							<c:forEach begin="${boardList.paging.blockStart}" end="${boardList.paging.blockEnd}" var="p">
-								<a class="btn btn-primary" href="${boardList.paging.url}?page=${p}" style="color: white">${p}</a>
-							</c:forEach>
-						</li>
-						<li>
-							<a class="btn btn-primary" href="${boardList.paging.url}?page=${boardList.paging.next}" aria-label="Next"> <span aria-hidden="true"	style="color: white">&raquo;</span></a>
-						</li>
-					</ul>
-					<button class="write-button btn btn-primary" type="button" onclick="location.href='board/board-form'">Write</button>
+					<button class="write-button" type="button" onclick="location.href='board/board-list'">Back</button>
+					<button class="write-button" type="submit">Regist</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
-
+</div>
 
 
 

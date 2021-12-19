@@ -22,12 +22,12 @@ public class JDBCTemplate {
 			// 1. oracle jdbc Driver를 JVM에 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			final String DB_URL = "jdbc:oracle:thin:@mmcloud_high?TNS_ADMIN=C:/CODE/Wallet_MMCLOUD";
+			final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
 			// Use the TNS Alias name along with the TNS_ADMIN - For ATP and ADW
 			// final static String
 			// DB_URL="jdbc:oracle:thin:@dbname_alias?TNS_ADMIN=/Users/test/wallet_dbname";
-			final String DB_USER = "ADMIN";
-			final String DB_PASSWORD = "Semimm123123";
+			final String DB_USER = "toyboard";
+			final String DB_PASSWORD = "1234";
 			final String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
 
 			pds = PoolDataSourceFactory.getPoolDataSource();

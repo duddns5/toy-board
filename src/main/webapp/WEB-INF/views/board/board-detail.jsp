@@ -46,25 +46,34 @@
 	line-height: 1.2;
 	border-radius: 10px;
 }
-.pagination{
-	position: relative;
-	left: 42%;
-}
-.btn{
-	background-color: #36304a;
-	padding: 16px 16px 16px 16px;
-	border-radius: 10px;
+textarea{
+	width: 96%;
+	height: 600px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	border: none;
-	margin-right: 6px;
-}
-.column1{
-	width: 120px;
-}
-.column6{
-	width: 80px;
+	resize: none;
 }
 tr>th, tr>td{
 	text-align: center !important;
+}
+.column1{
+	width: 50px;
+}
+.column2{
+	width: 360px;
+}
+.column3{
+	width: 50px;
+}
+.column4{
+	width: 110px;
+}
+.column5{
+	width: 50px;
+}
+.column6{
+	width: 150px;
 }
 </style>
 </head>
@@ -75,50 +84,64 @@ tr>th, tr>td{
 			<div class="wrap-table100">
 				<div class="table100">
 					<table>
-						<thead>
-							<tr class="table100-head">
-								<th class="column1">No</th>
-								<th class="column2">ID</th>
-								<th class="column3">Title</th>
-								<th class="column4">Date</th>
-								<th class="column5">Views</th>
-								<th class="column6">Likes</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${boardList.board}" var="list" varStatus="status">
 							<tr>
-								<td class="column1">${list.bdIdx}</td>
-								<td class="column2">${list.userId}</td>
-								<td class="column3"><a href="board/board-detail?bdIdx=${list.bdIdx}">${list.title}</a></td>
-								<td class="column4">${list.regDate}</td>
-								<td class="column5">${list.viewCount}</td>
-								<td class="column6">${list.recCount}</td>
+								<td class="column1">Title :</td>
+								<td class="column2">${datas.board.title}</td>
+								<td class="column3">ID : </td>
+								<td class="column4">${datas.board.userId}</td>
+								<td class="column5">date :</td>
+								<td class="column6">${datas.board.detailDate}</td>
+							</tr>
+							<tr>
+								<td class="column1"></td>
+								<td class="column2"></td>
+								<td class="column3">Views :</td>
+								<td class="column4">${datas.board.viewCount}</td>
+								<td class="column5">Likes :</td>
+								<td class="column6"><form action="/board/board-like" method="post">${datas.board.recCount}<input type="hidden" name="bdIdx" value="${datas.board.bdIdx}"> <button type="submit" class="fa fa-thumbs-up" aria-hidden="true"></button></form></td>
+							</tr>
+							<tr>
+								<td class="column1" colspan="6"><textarea name="content" required="required" maxlength="2000" readonly="readonly">${datas.board.content}</textarea></td>
+							</tr>
+							<tr>
+								<td class="column1" colspan="6" style="text-align: left !important;">Files :</td>
+							</tr>
+							<c:forEach items="${datas.files}" var="file">
+							<tr>
+								<td class="column1" colspan="6" style="text-align: left !important;"><a href="${file.downloadURL}">${file.originFileName} <i class="fa fa-floppy-o" aria-hidden="true"></i></a></td>
 							</tr>
 							</c:forEach>
-						</tbody>
 					</table>
-				</div>
 				<div class="movementWrapper" style="display: flex;justify-content: space-between;">
-					<ul class="pagination">
-						<li>
-							<a class="btn btn-primary" href="${boardList.paging.url}?page=${boardList.paging.prev}" aria-label="Previous"> <span aria-hidden="true" style="color: white">&laquo;</span></a>
-						</li>
-						<li>
-							<c:forEach begin="${boardList.paging.blockStart}" end="${boardList.paging.blockEnd}" var="p">
-								<a class="btn btn-primary" href="${boardList.paging.url}?page=${p}" style="color: white">${p}</a>
-							</c:forEach>
-						</li>
-						<li>
-							<a class="btn btn-primary" href="${boardList.paging.url}?page=${boardList.paging.next}" aria-label="Next"> <span aria-hidden="true"	style="color: white">&raquo;</span></a>
-						</li>
-					</ul>
-					<button class="write-button btn btn-primary" type="button" onclick="location.href='board/board-form'">Write</button>
+					<button class="write-button" type="button" onclick="location.href='board/board-list'">Back</button>
+					<div>
+						<button class="write-button" type="button" data-toggle="modal" data-target="#myModal${datas.board.bdIdx}">Delete</button>
+						<button class="write-button" type="button" onclick="location.href='board/board-modify?bdIdx=${datas.board.bdIdx}'">Update</button>
+					</div>	
+						<div class="modal fade" id="myModal${datas.board.bdIdx}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <form action="/board/board-delete" method="post">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							      </div>
+							      <div class="modal-body" style="display: flex;">
+							       <br>
+							        <div style="text-align: left; display: flex;">Password : <input type="password" name="password"><input type="hidden" name="bdIdx" value="${datas.board.bdIdx}"></div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #36304a;color: white;">Close</button>
+							        <button type="submit" class="btn btn-primary" style="background-color: #36304a;">Delete</button>
+							      </div>
+							    </div>
+						    </form>
+						  </div>
+						</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+</div>
 
 
 

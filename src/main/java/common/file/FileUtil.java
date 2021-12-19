@@ -47,7 +47,7 @@ public class FileUtil {
 				}
 			}
 			
-			res.put("mm.files",fileDTOs);
+			res.put("files",fileDTOs);
 			
 		} catch (IOException e) {
 			throw new HandlableException(ErrorCode.FAILED_FILE_UPLOAD_ERROR,e);
