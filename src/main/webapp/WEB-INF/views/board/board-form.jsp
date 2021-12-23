@@ -54,6 +54,21 @@ textarea{
 	border: none;
 	resize: none;
 }
+.input-file-button{
+  padding: 6px 25px;
+  background-color:#36304a;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  top: 5px;
+}
+#file_route{
+	width: 1000px;
+	font-family: OpenSans-Regular;
+	color: #808080;
+	font-weight: unset;
+}
 </style>
 </head>
 <body>
@@ -71,10 +86,18 @@ textarea{
 								<td class="column5"><input type="text" name="userId" style="height: 100%;" required="required" maxlength="15"/></td>
 							</tr>
 							<tr>
-								<td class="column1" colspan="2"><input type="file" name="files" multiple/></td>
+								<td class="column1" colspan="2">
+									<label class="input-file-button" for="input-file">File</label>
+									<input type="file" id="input-file" name="files" style="display:none" multiple onchange="getFileName()"/>
+								</td>
 								<td class="column3"></td>
 								<td class="column4">Password : </td>
 								<td class="column5"><input type="password" name="password" style="height: 100%;" maxlength="4"/></td>
+							</tr>
+							<tr>
+								<td class="column1" colspan="5">
+									<input type="text" readonly="readonly" id="file_route"/>
+								</td>
 							</tr>
 							<tr>
 								<td class="column1" colspan="5"><textarea name="content" required="required" maxlength="2000"></textarea></td>
@@ -101,5 +124,17 @@ textarea{
 	<script src="${contextPath}/resources/js/select2.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="${contextPath}/resources/js/main.js"></script>
+	<script type="text/javascript">
+	function getFileName(){
+		let fileArr = new Array();
+		const fileInfo = document.querySelector('#input-file').files;
+		const fileCnt = fileInfo.length;
+		for(let i = 0; i < fileCnt; i++){
+			fileArr.push(fileInfo[i].name);
+		}
+		document.getElementById('file_route').value = fileArr.toString();
+	}
+	
+	</script>
 </body>
 </html>
